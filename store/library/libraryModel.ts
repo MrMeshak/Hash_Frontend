@@ -1,3 +1,5 @@
+import internal from "stream";
+
 export interface ILibPost {
   id: string;
   title: string;
@@ -9,6 +11,7 @@ export interface ILibPost {
   updatedAt: Date | null;
   authorId: string;
   currentUserUpVote: boolean;
+  commentCount: number;
 }
 
 export interface ILibrary {

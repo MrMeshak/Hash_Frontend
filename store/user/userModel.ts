@@ -11,7 +11,6 @@ export interface IUser {
 
 export interface IUserState {
   user: IUser;
-  authToken: string;
   loggedIn: boolean;
   loading: boolean;
   error: string;

@@ -1,68 +1,84 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-
-import store, { RootState } from "../store";
 import { ILibPost, ILibraryState } from "./libraryModel";
 import {
   axiosGql,
   getLibraryQuery,
   IGetLibrary,
   IKnownError,
+  IToggleUpVote,
+  IToggleUpVoteRes,
+  toggleUpVoteQuery,
 } from "../../services/gqlApi";
-import { get } from "https";
+import { HYDRATE } from "next-redux-wrapper";
+import { Cookies } from "next/dist/server/web/spec-extension/cookies";
 
 const initialState: ILibraryState = {
   library: {
     posts: [],
     filteredPosts: [],
-    filter: "",
-    sort: "",
+    filter: {
+      title: "All",
+      value: ""
+    },
+    sort: {
+      title: "Newest",
+      value: "dateDesc"
+    },
   },
   loading: false,
   error: "",
 };
 
-export const getLibrary = createAsyncThunk<
-  ILibPost[],
-  IGetLibrary,
-  { rejectValue: IKnownError; state: RootState }
->("library/getLibrary", async (payload, { getState, rejectWithValue }) => {
-  return axiosGql
-    .post("/graphql", { query: getLibraryQuery })
-    .then((res) => {
-      return res.data.data.getLibrary;
-    })
-    .catch((error) => {
-      console.log("Error Object", error);
-      if (!error.response.data) {
-        throw error;
-      }
-      return rejectWithValue(error.response.data);
-    });
-});
+export const getLibrary = createAsyncThunk<ILibPost[], IGetLibrary, {}>(
+  "library/getLibrary",
+  async (payload: IGetLibrary) => {
+    return axiosGql
+      .post(
+        "/graphql",
+        { query: getLibraryQuery },
+        { headers: { Cookie: `authToken=${payload.authToken}` } }
+      )
+      .then((res) => {
+        return res.data.data.posts;
+      });
+  }
+);
+
+export const toggleUpVote = createAsyncThunk<IToggleUpVoteRes, IToggleUpVote,{}>(
+  "library/toggleUpVote",
+  async (payload: IToggleUpVote) => {
+    return axiosGql
+      .post("/graphql",
+        { query: toggleUpVoteQuery,
+        variables: {postId: payload.postId}})
+      .then(res => res.data.data)
+  }
+)
+
+
 
 const librarySlice = createSlice({
   name: "library",
   initialState: initialState,
-  reducers: {
-    rehydrate(state, action) {
-      state.library = action.payload.library;
-      state.loading = action.payload.loading;
-      state.error = action.payload.error;
+  reducers: {},
+  extraReducers: {
+    [HYDRATE]: (state, action) => {
+      return {
+        ...state,
+        ...action.payload.library,
+      };
     },
-  },
-  extraReducers(builder) {
-    builder
-      .addCase(getLibrary.pending, (state, action) => {
-        state.loading = true;
-      })
-      .addCase(getLibrary.fulfilled, (state, action) => {
-        state.loading = false;
-        state.library.posts = action.payload;
-      })
-      .addCase(getLibrary.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message || "Something went wrong";
-      });
+    ["library/getLibrary/pending"]: (state) => {
+      state.loading = true;
+    },
+    ["library/getLibrary/fulfilled"]: (state, action) => {
+      state.loading = false;
+      state.library.posts = action.payload;
+    },
+    ["library/getLibrary/rejected"]: (state, action) => {
+      state.loading = false;
+      state.error = action.error.message || "Something went wrong";
+    },
   },
 });
 

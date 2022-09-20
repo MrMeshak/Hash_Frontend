@@ -4,6 +4,7 @@ import { IUser } from "../store/user/userModel";
 export const axiosAuth = axios.create({
   baseURL: "http://localhost:4000/auth",
   timeout: 4000,
+  withCredentials: true,
 });
 
 export interface ILogin {

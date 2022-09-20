@@ -1,14 +1,25 @@
-import '../styles/globals.css'
+import {FC} from 'react'
 import type { AppProps } from 'next/app'
 import {Provider} from 'react-redux'
-import store, { getStore } from '../store/store'
+import { config } from '@fortawesome/fontawesome-svg-core'
+import '@fortawesome/fontawesome-svg-core/styles.css'
+config.autoAddCss = false
 
-function MyApp({ Component, pageProps }: AppProps) {
-  const store = getStore(pageProps.initialState);
+import {ThemeProvider} from 'styled-components'
+import {GlobalStyle} from '../styles/global.styles'
+import {theme} from '../styles/theme'
+import { wrapper } from '../store/store'
+
+const MyApp:FC<AppProps> = ({ Component, ...rest}: AppProps) => {
+  const {store, props} = wrapper.useWrappedStore(rest)
   return (
-    <Provider store={store}>
-      <Component {...pageProps} />
-    </Provider>
+    
+      <ThemeProvider theme={theme}>
+        <GlobalStyle/>
+        <Provider store={store}>
+          <Component {...props.pageProps} />
+        </Provider>
+      </ThemeProvider>
   )
 }
 

@@ -3,6 +3,7 @@ import axios from "axios";
 export const axiosGql = axios.create({
   baseURL: "http://localhost:4000",
   timeout: 4000,
+  withCredentials: true,
 });
 
 export interface IKnownError {
@@ -10,12 +11,12 @@ export interface IKnownError {
 }
 
 export interface IGetLibrary {
-  _: string;
+  authToken: string;
 }
 
 export const getLibraryQuery = `
     query{
-        getLibrary
+        posts
         {
             id
             title
@@ -27,6 +28,41 @@ export const getLibraryQuery = `
             updatedAt
             authorId
             currentUserUpVote
+            commentCount
         }
     }
+`;
+
+export interface ICurrentUser {
+  authToken: string;
+}
+
+export const getCurrentUserQuery = `
+  query {
+    currentUser{
+      id
+      email
+      firstname
+      lastname
+      profileImg
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+export interface IToggleUpVote {
+  postId: string,
+}
+
+export interface IToggleUpVoteRes{
+  postId: string
+}
+
+export const toggleUpVoteQuery = `
+  mutation toggleUpVote($postId: ID){
+    toggleUpVote(postId: $postId){
+       id
+    }
+  }
 `;
