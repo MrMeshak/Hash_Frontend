@@ -11,9 +11,14 @@ import UserWidget from '../../widgets/user/UserWidget';
 
 export interface ISideBarProps {
     sideBarOpen: boolean;
+    toggleSideBar: Function;
 }
 
 export default function SideBar (props: ISideBarProps) {
+
+  const handleOverlayClick = () => {
+    props.toggleSideBar()
+  }
 
   return (
     <S.Container sideBarOpen={props.sideBarOpen}>
@@ -22,7 +27,7 @@ export default function SideBar (props: ISideBarProps) {
           <PostFilterWidget/>
           <RoadMapWidget/>
         </S.SideBarContainer>
-        <S.Overlay sideBarOpen={props.sideBarOpen}/>
+        <S.Overlay sideBarOpen={props.sideBarOpen} onClick={handleOverlayClick}/>
     </S.Container>
   );
 }

@@ -66,3 +66,26 @@ export const toggleUpVoteQuery = `
     }
   }
 `;
+
+export interface IGetFilteredLibrary{
+  filter: string;
+  sort: string;
+}
+
+export const getFilteredLibraryQuery = `
+  query filteredPosts($filter: String!, $sort: String!) {
+    filteredPosts(filter: $filter, sort: $sort){
+      id
+      title
+      description
+      category
+      status
+      upVotes
+      createdAt
+      updatedAt
+      authorId
+      currentUserUpVote
+      commentCount
+    }
+  }
+`

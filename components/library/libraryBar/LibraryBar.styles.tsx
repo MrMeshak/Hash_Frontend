@@ -6,6 +6,7 @@ interface ISortFilter{
 }
 
 export const Container = styled.div`
+margin-top: 5rem;
     padding: 0.5rem 1.5rem;
     display:flex;
     justify-content: space-between;

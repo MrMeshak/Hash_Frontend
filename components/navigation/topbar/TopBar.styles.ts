@@ -3,9 +3,11 @@ import styled from "styled-components";
 export const Container = styled.div`
   height: 5rem;
   padding: 1rem 1.5rem;
+  width: 100%;
   display: flex;
   justify-content: space-between;
-  position: relative;
+  position: fixed;
+  top: 0;
   z-index: 6;
 
   background: radial-gradient(

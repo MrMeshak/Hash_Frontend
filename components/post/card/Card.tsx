@@ -6,7 +6,6 @@ import { ILibPost } from '../../../store/library/libraryModel';
 import { set } from 'immer/dist/internal';
 import { axiosGql, toggleUpVoteQuery } from '../../../services/gqlApi';
 import { selectLoggedIn, useAppDispatch, useAppSelector } from '../../../store/hooks';
-import { toggleUpVote } from '../../../store/library/librarySlice';
 
 export interface ICardProps {
   post:ILibPost

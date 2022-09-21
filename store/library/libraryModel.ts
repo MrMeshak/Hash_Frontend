@@ -17,8 +17,8 @@ export interface ILibPost {
 export interface ILibrary {
   posts: ILibPost[];
   filteredPosts: ILibPost[];
-  filter: string;
-  sort: string;
+  filter: IFilter;
+  sort: ISort;
 }
 
 export interface ILibraryState {
@@ -26,3 +26,31 @@ export interface ILibraryState {
   loading: boolean;
   error: string;
 }
+
+export interface IFilter{
+  title: string;
+  value: string;
+}
+
+export interface ISort{
+  title: string;
+  value: string;
+}
+
+export const sortList:ISort[] = [
+    {title:"Newest", value:"dateDesc"},
+    {title: "Oldest", value:"dateAsc"},
+    {title: "Most Upvotes", value: "upVotesDesc"},
+    {title: "Least Upvotes", value: "upVotesAsc"}, 
+    {title: "Most Comments", value: "commentCountDesc"}, 
+    {title:"Least Comments", value: "commentCountAsc"}
+  ]
+
+  export const filterList:IFilter[] = [
+    {title:"All" , value:""},
+    {title:"UI" , value:"UI"},
+    {title:"UX" , value:"UX"},
+    {title:"Enhancement" , value:"Enhancement"},
+    {title:"Feature" , value:"Feature"},
+  ]
+  
