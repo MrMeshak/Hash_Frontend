@@ -67,11 +67,6 @@ export const toggleUpVoteQuery = `
   }
 `;
 
-export interface IGetFilteredLibrary{
-  filter: string;
-  sort: string;
-}
-
 export const getFilteredLibraryQuery = `
   query filteredPosts($filter: String!, $sort: String!) {
     filteredPosts(filter: $filter, sort: $sort){
@@ -86,6 +81,13 @@ export const getFilteredLibraryQuery = `
       authorId
       currentUserUpVote
       commentCount
+    }
+  }
+`
+export const addPostQuery =`
+  mutation addPost($title: String!, $description: String!, $category: String!){
+    addPost(title: $title, description: $description, category: $category){
+      id
     }
   }
 `

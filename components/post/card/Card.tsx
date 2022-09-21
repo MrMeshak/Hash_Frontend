@@ -40,7 +40,7 @@ export default function Card (props: ICardProps) {
       })
     }
   }
-
+  
   return (
     <S.Container>
       <S.Title>{post.title}</S.Title>

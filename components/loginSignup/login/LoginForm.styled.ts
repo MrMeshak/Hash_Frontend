@@ -3,11 +3,8 @@ import {
   NavigationLink,
   PrimaryBtn,
 } from "../../utility/button/button.styles";
-import { DefaultTextInput } from "../../utility/input/input.styles";
+import { DefaultTextInput, ITextInputProps } from "../../utility/input/input.styles";
 
-interface ITextInputProps {
-  hasError: boolean;
-}
 
 export const Container = styled.div`
   padding: 1.5rem;

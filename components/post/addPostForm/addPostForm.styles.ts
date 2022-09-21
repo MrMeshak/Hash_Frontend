@@ -4,7 +4,7 @@ import {
   PrimaryBtn,
   TertiaryBtn,
 } from "../../utility/button/button.styles";
-import { DefaultTextInput } from "../../utility/input/input.styles";
+import { DefaultTextArea, DefaultTextInput, ITextInputProps } from "../../utility/input/input.styles";
 
 export const Container = styled.div`
   padding: 1.5rem;
@@ -75,30 +75,35 @@ export const Description = styled.p`
   font-size: 0.9rem;
 `;
 
-export const TextInput = styled(DefaultTextInput)`
+export const TextInput = styled(DefaultTextInput)<ITextInputProps>`
   margin: 1rem 0rem 0rem 0rem;
   width: 100%;
   padding: 0.9rem 1rem;
+  border: 1px solid
+    ${(props) => (props.hasError ? props.theme.form.error : "transparent")};
   &:focus {
-    border-color: ${(props) => props.theme.form.active};
+    border-color: ${(props) =>
+      props.hasError ? props.theme.form.error : props.theme.form.active};
   }
 `;
 
-export const TextAreaInput = styled.textarea`
+export const TextAreaInput = styled(DefaultTextArea)<ITextInputProps>`
   margin: 1rem 0rem 0rem 0rem;
   width: 100%;
   height: 10rem;
   padding: 0.9rem 1rem;
-  resize: vertical;
-  outline: none;
-  border: 1px solid ${(props) => props.theme.form.default};
-  background-color: ${(props) => props.theme.form.default};
-  font-family: "Jost";
-  font-size: 0.9rem;
-  color: ${(props) => props.theme.form.defaultText};
+  border: 1px solid 
+    ${(props) => props.hasError? props.theme.form.error: "transparent"};
   &:focus {
-    border-color: ${(props) => props.theme.form.active};
+    border-color: ${(props) =>
+      props.hasError ? props.theme.form.error : props.theme.form.active};
   }
+`;
+
+export const ErrorMessage = styled.div`
+  color: ${(props) => props.theme.form.error};
+  font-size: 0.8rem;
+  font-weight: 400;
 `;
 
 export const DropDownBtn = styled.button`
@@ -108,6 +113,7 @@ export const DropDownBtn = styled.button`
   display: flex;
   justify-content: space-between;
   border: none;
+  border-radius: 5px;
 
   color: ${(props) => props.theme.form.defaultText};
   font-weight: 400;
@@ -116,6 +122,7 @@ export const DropDownBtn = styled.button`
 
   background-color: ${(props) => props.theme.form.default};
 `;
+
 export const Option = styled.option`
   background-color: ${(props) => props.theme.colors.surface};
 `;
@@ -133,3 +140,4 @@ export const IconArrowSpan = styled.span`
   margin-right: 1rem;
   color: ${(props) => props.theme.colors.secondary};
 `;
+

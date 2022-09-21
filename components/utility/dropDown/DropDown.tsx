@@ -16,9 +16,6 @@ export interface IDropDownProps {
 
 export default function DropDown (props: IDropDownProps) {
     
-    const handleOptionClick = () => {
-
-    }
 
     return (
         <S.Container>

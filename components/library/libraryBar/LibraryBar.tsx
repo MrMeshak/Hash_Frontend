@@ -45,7 +45,7 @@ export default function PostBar (props: IPostBarProps) {
       </S.SortFilter>
 
         {loggedIn?
-          <Link href={"/"}><S.AddFeedbackBtn>+ Add Feedback</S.AddFeedbackBtn></Link>:
+          <Link href={"/post/addPost"}><S.AddFeedbackBtn>+ Add Feedback</S.AddFeedbackBtn></Link>:
           <Link href={"/login"}><S.LoginBtn>Login</S.LoginBtn></Link>
         }
     </S.Container>
