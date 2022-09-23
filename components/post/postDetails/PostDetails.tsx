@@ -27,7 +27,7 @@ export default function PostDetails (props: IPostDetailsProps) {
       </S.PostDetailsTopBar>
       <Card post = {post}/>
      {post.commentCount?<CommentList commentCount={post.commentCount} comments={post.comments}/>:null}
-     {loggedIn? <AddCommentForm/> : null}
+     {loggedIn? <AddCommentForm postId = {post.id}/> : null}
     </S.Container>
   );
 }

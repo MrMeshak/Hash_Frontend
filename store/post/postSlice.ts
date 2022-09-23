@@ -1,8 +1,8 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import { HYDRATE } from 'next-redux-wrapper';
-import { axiosGql, IGetPost, getPostQuery } from '../../services/gqlApi';
+import { axiosGql, IGetPost, getPostQuery, IAddComment, addCommentQuery } from '../../services/gqlApi';
 import { RootState } from '../store';
-import {IPost, IPostState} from './postModel'
+import {IComment, IPost, IPostState} from './postModel'
 
 const initialState: IPostState = {
   post: {
@@ -47,6 +47,20 @@ export const getPost = createAsyncThunk<IPost,IGetPost,{state: RootState}>(
   }
 )
 
+export const addComment = createAsyncThunk<IComment,IAddComment,{state: RootState}>(
+  'post/addComment', async (payload:IAddComment) => {
+    return axiosGql
+      .post(
+        '/graphql',
+        {
+          query: addCommentQuery,
+          variables: {postId: payload.postId, content: payload.content}
+        }
+      )
+      .then((res) => res.data.data.addComment)
+  }
+)
+
 
 const postSlice = createSlice({
   name: 'post',
@@ -65,8 +79,23 @@ const postSlice = createSlice({
     ['post/getPost/fulfilled']: (state,action) => {
         state.loading = false;
         state.post = action.payload
+        state.error = "";
     },
     ['post/getPost/rejected']: (state,action) => {
+        state.loading = false;
+        console.log(action.error)
+        state.error = action.error.message || "Something went wrong"
+    },
+    ['post/addComment/pending']: (state) => {
+        state.loading = true;
+    },
+    ['post/addComment/fulfilled']: (state,action) => {
+        state.loading = false;
+        state.post.comments.push(action.payload);
+        state.post.commentCount++;
+        state.error = "";
+    },
+    ['post/addComment/rejected']: (state,action) => {
         state.loading = false;
         console.log(action.error)
         state.error = action.error.message || "Something went wrong"

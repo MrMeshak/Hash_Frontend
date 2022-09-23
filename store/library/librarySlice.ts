@@ -94,6 +94,7 @@ const librarySlice = createSlice({
     ["library/getLibrary/fulfilled"]: (state, action) => {
       state.loading = false;
       state.library.posts = action.payload;
+      state.error = "";
     },
     ["library/getLibrary/rejected"]: (state, action) => {
       state.loading = false;
@@ -105,6 +106,7 @@ const librarySlice = createSlice({
     ["library/getFilteredLibrary/fulfilled"]: (state, action) => {
       state.loading = false;
       state.library.posts = action.payload;
+      state.error = "";
     },
     ["library/getFilteredLibrary/rejected"]: (state, action) => {
       state.loading = false;

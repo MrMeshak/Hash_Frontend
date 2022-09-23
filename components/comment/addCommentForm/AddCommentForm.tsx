@@ -1,23 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FormikErrors, useFormik } from 'formik';
 import * as S from './AddCommentForm.styled'
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import { addComment } from '../../../store/post/postSlice';
 
 export interface IAddCommentFormValues{
   content: string;
 }
 
 export interface IAddCommentFormProps {
+  postId: string;
 }
 
 export default function AddCommentForm (props: IAddCommentFormProps) {
-
   const maxTextAreaChar = 250;
+  const dispatch = useAppDispatch();
+
+  const [apiError,setApiError] = useState("")
+
+
   const intialValues:IAddCommentFormValues = {
     content: ""
   }
 
-  const onSubmit = (values:IAddCommentFormValues) => {
-
+  const onSubmit = async (values:IAddCommentFormValues) => {
+    try{
+      await dispatch(addComment({postId: props.postId, content: values.content}))
+      formik.resetForm()
+    }catch(error){
+      console.log(error)
+    } 
   }
 
   const validate = (values:IAddCommentFormValues) => {
@@ -45,13 +57,14 @@ export default function AddCommentForm (props: IAddCommentFormProps) {
         <S.TextAreaInput 
           id='content'
           name='content'
+          value = {formik.values.content}
           maxLength={maxTextAreaChar} 
           onChange = {formik.handleChange}
           onBlur = {formik.handleBlur}
           hasError={!!(formik.errors.content && formik.touched.content)}
         />
         {formik.touched.content && formik.errors.content ? <S.ErrorMessage>{formik.errors.content}</S.ErrorMessage> : null}
-
+        <S.ErrorMessage>{useAppSelector(state => state.post.error)}</S.ErrorMessage>
           <S.BottomBar>
             {maxTextAreaChar - formik.values.content.length} Characters Left
             <S.SubmitBtn> Post Comment </S.SubmitBtn>

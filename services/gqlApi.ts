@@ -141,8 +141,40 @@ query post($postId: ID){
   }
 `
 
+export interface IAddComment {
+  postId: string;
+  content: string;
+}
 
-
-
+export const addCommentQuery = `
+  mutation addComment($postId: ID, $content: String!){
+    addComment(postId: $postId, content: $content){
+      id
+      content
+      createdAt
+      updatedAt
+      authorId
+      author{
+        id
+        firstname
+        lastname
+        profileImg
+      }
+      replies{
+        id
+        content
+        createdAt
+        updatedAt
+        authorId
+        author{
+          id
+          firstname
+          lastname
+          profileImg
+        }
+      }
+    }
+  }
+`
 
 

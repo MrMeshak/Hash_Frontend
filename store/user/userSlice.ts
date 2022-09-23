@@ -123,6 +123,7 @@ const userSlice = createSlice({
       state.loading = false;
       state.user = action.payload;
       state.loggedIn = true;
+      state.error = "";
     },
     ["user/signup/rejected"]: (state, action) => {
       state.loading = false;
@@ -139,6 +140,7 @@ const userSlice = createSlice({
       state.loading = false;
       state.user = action.payload;
       state.loggedIn = true;
+      state.error = "";
     },
     ["user/currentUser/rejected"]: (state, action) => {
       state.error = action.error.message || "Something went wrong";
