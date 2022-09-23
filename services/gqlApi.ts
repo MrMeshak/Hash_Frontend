@@ -91,3 +91,58 @@ export const addPostQuery =`
     }
   }
 `
+
+export interface IGetPost{
+  authToken: string;
+  postId: string;
+}
+
+export const getPostQuery = `
+query post($postId: ID){
+    post(postId: $postId){
+      id
+      title
+      description
+      category
+      status  
+      upVotes
+      createdAt
+      updatedAt
+      authorId
+      currentUserUpVote
+      commentCount
+      comments{
+        id
+        content
+        createdAt
+        updatedAt
+        authorId
+        author{
+          id
+          firstname
+          lastname
+          profileImg
+        }
+        replies{
+          id
+          content
+          createdAt
+          updatedAt
+          authorId
+          author{
+            id
+            firstname
+            lastname
+            profileImg
+          }
+        }
+      }
+    }
+  }
+`
+
+
+
+
+
+

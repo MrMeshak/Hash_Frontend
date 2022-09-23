@@ -34,17 +34,14 @@ const Home: NextPage = (props) => {
 export const getServerSideProps = wrapper.getServerSideProps( (store) => async (context) => {
   console.log('cookies',context.req.cookies)
   const authToken = context.req.cookies.authToken 
-  if(!!authToken){
+  if(authToken){
     await store.dispatch(currentUser({authToken: authToken }))
     await store.dispatch(getLibrary({authToken: authToken})) 
   }else{
     await store.dispatch(getLibrary({authToken: ""})) 
   }
-  
-  console.log('State on server', store.getState());
-
   return {
-    props: {key: {}}
+    props: {}
   }
 })
 

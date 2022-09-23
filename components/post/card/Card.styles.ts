@@ -16,7 +16,7 @@ export const Container = styled.div`
 
 export const Title = styled.h3`
   color: ${(props) => props.theme.colors.tertiary};
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 600;
 `;
 
@@ -39,7 +39,7 @@ export const Tag = styled.div`
   background-color: ${(props) => props.theme.interactive.default};
 `;
 
-export const PostInforContainer = styled.div`
+export const PostInfoContainer = styled.div`
   margin-top: 1rem;
 
   display: flex;

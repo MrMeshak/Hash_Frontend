@@ -46,13 +46,13 @@ export default function Card (props: ICardProps) {
       <S.Title>{post.title}</S.Title>
       <S.Description>{post.description}</S.Description>
       <S.Tag>{post.category}</S.Tag>
-      <S.PostInforContainer>
+      <S.PostInfoContainer>
           <S.VoteCountBtn active = {voteCountBtnActive} onClick = {handleVoteCountBtn}>
             <S.IconVoteSpan active = {voteCountBtnActive}><FontAwesomeIcon icon={faAngleUp}/></S.IconVoteSpan>
             {upVotes}
           </S.VoteCountBtn>
           <S.CommentCount><S.IconCommmentSpan><FontAwesomeIcon icon={faComment}/></S.IconCommmentSpan>{post.commentCount}</S.CommentCount>
-      </S.PostInforContainer>
+      </S.PostInfoContainer>
     </S.Container>
   );
 }

@@ -19,6 +19,7 @@ export interface IColorTheme {
   textOnDark: string;
   textOnLight: string;
   textGreyedOut: string;
+  seperationLine: string;
 }
 
 interface IButtonTheme {
@@ -80,6 +81,7 @@ export const colortheme: IColorTheme = {
   textOnDark: "#f2f4ff",
   textOnLight: "#647196",
   textGreyedOut: "#979797",
+  seperationLine: "#8C92B3" 
 };
 
 export const buttonTheme: IButtonTheme = {
