@@ -2,7 +2,8 @@ import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
 import userReducer from "./user/userSlice";
 import libraryReducer from "./library/librarySlice";
-import postReducer from "./post/postSlice"
+import postReducer from "./post/postSlice";
+import roadMapReducer from "./roadMap/roadMapSlice"
 
 const makeStore = () =>
   configureStore({
@@ -10,6 +11,7 @@ const makeStore = () =>
       user: userReducer,
       library: libraryReducer,
       post: postReducer,
+      roadMap: roadMapReducer
     },
     devTools: true,
   });

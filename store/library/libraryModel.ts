@@ -1,4 +1,4 @@
-import internal from "stream";
+import {theme} from '../../styles/theme'
 
 export interface ILibPost {
   id: string;
@@ -16,7 +16,6 @@ export interface ILibPost {
 
 export interface ILibrary {
   posts: ILibPost[];
-  filteredPosts: ILibPost[];
   filter: IFilter;
   sort: ISort;
 }

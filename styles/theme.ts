@@ -53,12 +53,18 @@ interface IFormTheme {
   defaultText: string;
 }
 
+export interface IStatusTheme{
+  
+}
+
 export interface ITheme {
   colors: IColorTheme;
   button: IButtonTheme;
   interactive: IInteractiveTheme;
   form: IFormTheme;
 }
+
+
 
 export const colortheme: IColorTheme = {
   primary: "#ad1fea",
@@ -82,6 +88,7 @@ export const colortheme: IColorTheme = {
   textOnLight: "#647196",
   textGreyedOut: "#979797",
   seperationLine: "#8C92B3" 
+  
 };
 
 export const buttonTheme: IButtonTheme = {
@@ -116,9 +123,16 @@ export const formTheme: IFormTheme = {
   defaultText: colortheme.tertiaryVarient,
 };
 
+export const StatusTheme: IStatusTheme = {
+  planned: colortheme.primaryAccent,
+  inProgress: colortheme.primary,
+  live: colortheme.secondaryAccent
+}
+
 export const theme: ITheme = {
   colors: colortheme,
   button: buttonTheme,
   interactive: interactiveTheme,
   form: formTheme,
 };
+

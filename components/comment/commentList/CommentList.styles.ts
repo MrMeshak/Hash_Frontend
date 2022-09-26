@@ -11,13 +11,7 @@ export const Container = styled.div`
 export const Title = styled.h3`
   margin-bottom: 1.3rem;
   color: ${(props) => props.theme.colors.tertiaryVarient};
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-weight: 700;
 `
 
-export const Line = styled.hr`
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
-  border: 1px solid ${(props) => props.theme.colors.seperationLine};
-  opacity: 25%;
-`

@@ -16,8 +16,6 @@ export default function AddCommentForm (props: IAddCommentFormProps) {
   const maxTextAreaChar = 250;
   const dispatch = useAppDispatch();
 
-  const [apiError,setApiError] = useState("")
-
 
   const intialValues:IAddCommentFormValues = {
     content: ""
@@ -67,7 +65,7 @@ export default function AddCommentForm (props: IAddCommentFormProps) {
         <S.ErrorMessage>{useAppSelector(state => state.post.error)}</S.ErrorMessage>
           <S.BottomBar>
             {maxTextAreaChar - formik.values.content.length} Characters Left
-            <S.SubmitBtn> Post Comment </S.SubmitBtn>
+            <S.SubmitBtn type="submit"> Post Comment </S.SubmitBtn>
           </S.BottomBar>
       </S.Form>
   );

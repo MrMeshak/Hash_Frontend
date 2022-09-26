@@ -1,12 +1,21 @@
 import styled from "styled-components";
-import { InteractiveBtn, NavigationLinkBtn } from "../../utility/button/button.styles";
+
+export interface VerticalLineProps{
+  isLast: boolean;
+}
 
 export const Container = styled.div`
+  display: flex;
 `
-export const Line = styled.hr`
-  margin-bottom: 1.5rem;
+
+export const VerticalLine = styled.div<VerticalLineProps>`
+  height: ${(props) => props.isLast? "0.8rem" : "auto"};
+  margin: 0rem 2rem 0rem 0.5rem;
   border: 1px solid ${(props) => props.theme.colors.seperationLine};
   opacity: 25%;
+`
+export const ReplyContainer = styled.div`
+  margin-bottom: 1rem;
 `
 
 export const TitleContainer = styled.div`
@@ -20,15 +29,8 @@ export const Author = styled.div`
   font-weight: 600;
 `
 
-export const ReplyBtn = styled(NavigationLinkBtn)`
-  
-  background-color: transparent;
-  color: ${(props) => props.theme.interactive.headingHighlightText};
-  
-`
-
 export const Content = styled.div`
-  margin-top: 0.5rem;
+  margin-top: 0rem;
   color: ${(props) => props.theme.colors.paragraph};
   font-weight: 400;
   font-size: 0.9rem;

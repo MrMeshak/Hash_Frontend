@@ -13,3 +13,4 @@ export const selectSort = () => (state: RootState) => state.library.library.sort
 export const selectFilter = () => (state: RootState) => state.library.library.filter;
 
 export const selectPost = () => (state: RootState) => state.post.post;
+export const selectPostError = () => (state: RootState) => state.post.error;

@@ -4,7 +4,7 @@ import { InteractiveBtn } from "../../utility/button/button.styles";
 
 export interface IVoteCountBtn {
   active: boolean;
-}
+} 
 
 export const Container = styled.div`
   margin-top: 1rem;
@@ -14,10 +14,27 @@ export const Container = styled.div`
   background-color: ${(props) => props.theme.colors.surface};
 `;
 
-export const Title = styled.h3`
+export const RoadMapBar = styled.div`
+
+`
+export const ColorAccent = styled.div`
+  width: 110%;
+  height: 0.5rem;
+
+  background-color: ${(props => props.theme.colors.primary)};
+`
+export const Status = styled.p`
+
+`
+
+export const Title = styled.a`
   color: ${(props) => props.theme.colors.tertiary};
   font-size: 1rem;
   font-weight: 600;
+  cursor: pointer;
+  &:hover{
+    text-decoration: underline;
+  }
 `;
 
 export const Description = styled.p`

@@ -17,7 +17,6 @@ import { RootState } from "../store";
 const initialState: ILibraryState = {
   library: {
     posts: [],
-    filteredPosts: [],
     filter: {
       title: "All",
       value: ""

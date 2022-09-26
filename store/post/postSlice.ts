@@ -1,8 +1,9 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import { HYDRATE } from 'next-redux-wrapper';
-import { axiosGql, IGetPost, getPostQuery, IAddComment, addCommentQuery } from '../../services/gqlApi';
+import { IAddReplyFormProps } from '../../components/reply/addReplyForm/addReplyForm';
+import { axiosGql, IGetPost, getPostQuery, IAddComment, addCommentQuery, addReplyQuery, IAddReply } from '../../services/gqlApi';
 import { RootState } from '../store';
-import {IComment, IPost, IPostState} from './postModel'
+import {IComment, IPost, IPostState, IReply} from './postModel'
 
 const initialState: IPostState = {
   post: {
@@ -48,7 +49,8 @@ export const getPost = createAsyncThunk<IPost,IGetPost,{state: RootState}>(
 )
 
 export const addComment = createAsyncThunk<IComment,IAddComment,{state: RootState}>(
-  'post/addComment', async (payload:IAddComment) => {
+  'post/addComment', 
+  async (payload:IAddComment) => {
     return axiosGql
       .post(
         '/graphql',
@@ -58,6 +60,21 @@ export const addComment = createAsyncThunk<IComment,IAddComment,{state: RootStat
         }
       )
       .then((res) => res.data.data.addComment)
+  }
+)
+
+export const addReply = createAsyncThunk<IReply,IAddReply,{state:RootState}>(
+  'post/addReply', 
+  async(payload: IAddReply) => {
+    return axiosGql
+      .post(
+        '/graphql',
+        {
+          query: addReplyQuery,
+          variables: {commentId: payload.commentId, content: payload.content}
+        }
+      )
+      .then((res) => res.data.data.addReply)
   }
 )
 
@@ -96,6 +113,21 @@ const postSlice = createSlice({
         state.error = "";
     },
     ['post/addComment/rejected']: (state,action) => {
+        state.loading = false;
+        console.log(action.error)
+        state.error = action.error.message || "Something went wrong"
+    },
+    ['post/addReply/pending']: (state) => {
+        state.loading = true;
+    },
+    ['post/addReply/fulfilled']: (state,action) => {
+        state.loading = false;
+        console.log(action.payload)
+        const commentIndex = state.post.comments.findIndex((comment)=>comment.id === action.payload.commentId)
+        state.post.comments[commentIndex].replies.push(action.payload)
+        state.error = "";
+    },
+    ['post/addReply/rejected']: (state,action) => {
         state.loading = false;
         console.log(action.error)
         state.error = action.error.message || "Something went wrong"

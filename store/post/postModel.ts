@@ -14,6 +14,7 @@ export interface IReply {
   createdAt: Date|null;
   updatedAt: Date|null;
 
+  commentId: string;
   authorId:string;
   author: IAuthor;
 }

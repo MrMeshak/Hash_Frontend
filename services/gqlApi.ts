@@ -177,4 +177,30 @@ export const addCommentQuery = `
   }
 `
 
+export interface IAddReply{
+  commentId: string;
+  content: string;
+}
+
+export const addReplyQuery = `
+mutation addReply($commentId: ID, $content: String!){
+  addReply(commentId: $commentId, content: $content){
+    id
+    content
+    createdAt
+    updatedAt
+    commentId
+    authorId
+    author{
+      id
+      firstname
+      lastname
+      profileImg
+    }
+  }
+}
+`
+
+
+
 

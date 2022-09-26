@@ -6,6 +6,7 @@ import { ILibPost } from '../../../store/library/libraryModel';
 import { set } from 'immer/dist/internal';
 import { axiosGql, toggleUpVoteQuery } from '../../../services/gqlApi';
 import { selectLoggedIn, useAppDispatch, useAppSelector } from '../../../store/hooks';
+import Link from 'next/link';
 
 export interface ICardProps {
   post:ILibPost
@@ -40,10 +41,10 @@ export default function Card (props: ICardProps) {
       })
     }
   }
-  
+
   return (
     <S.Container>
-      <S.Title>{post.title}</S.Title>
+      <Link href={'/post/'+ post.id}><S.Title>{post.title}</S.Title></Link>
       <S.Description>{post.description}</S.Description>
       <S.Tag>{post.category}</S.Tag>
       <S.PostInfoContainer>

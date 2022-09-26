@@ -1,29 +1,17 @@
 import styled from "styled-components";
-import { PrimaryBtn, TertiaryBtn } from "../../utility/button/button.styles";
-import { DefaultTextArea, DefaultTextInput, ITextInputProps } from "../../utility/input/input.styles";
+import { PrimaryBtn } from "../../utility/button/button.styles";
+import { DefaultTextArea, ITextInputProps } from "../../utility/input/input.styles";
 
 export const Form = styled.form`
-  width: 100%;
   margin-top: 2rem;
-  position: relative;
-  padding: 1.5rem 1.5rem 0.5rem 1.5rem;
-  display: inline-block;
 
-  background-color: ${(props) => props.theme.colors.surface};
-  border-radius: 10px;
-`
-export const Title = styled.h3`
-  margin-bottom: 1.3rem;
-  color: ${(props) => props.theme.colors.tertiaryVarient};
-  font-size: 1.1rem;
-  font-weight: 700;
-`
 
+`
 export const TextAreaInput = styled(DefaultTextArea)<ITextInputProps>`
   resize: none;
   margin: 0rem 0rem 0rem 0rem;
   width: 100%;
-  height: 8rem;
+  height: 5rem;
   padding: 0.9rem 1rem;
   border: 1px solid 
     ${(props) => props.hasError? props.theme.form.error: "transparent"};
@@ -39,6 +27,11 @@ export const ErrorMessage = styled.div`
   font-weight: 400;
 `;
 
+export const AddReplyBtn = styled(PrimaryBtn)`
+  width: fit-content;
+  padding: 0.8rem 1.1rem;
+`
+
 export const BottomBar = styled.div`
   display: flex;
   justify-content: space-between;
@@ -50,9 +43,3 @@ export const BottomBar = styled.div`
 
   color: ${(props) => props.theme.colors.textGreyedOut};
 `;
-
-export const SubmitBtn = styled(PrimaryBtn)`
-  width: fit-content;
-  padding: 0.8rem 1.1rem;
-`;
-
