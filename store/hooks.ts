@@ -14,3 +14,5 @@ export const selectFilter = () => (state: RootState) => state.library.library.fi
 
 export const selectPost = () => (state: RootState) => state.post.post;
 export const selectPostError = () => (state: RootState) => state.post.error;
+
+export const selectRoadMapLibraries = () => (state:RootState) => state.roadMap.libraries

@@ -1,14 +1,14 @@
 import * as React from 'react';
-import * as S from './TopBar.styles';
+import * as S from './TopBarMobile.styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faBars,faXmark} from '@fortawesome/free-solid-svg-icons'
 
-export interface ITopBarProps {
+export interface ITopBarMobileProps {
   sideBarOpen: boolean;
   toggleSideBar: Function;
 }
 
-export default function TopBar (props: ITopBarProps) {
+export default function TopBarMobile (props: ITopBarMobileProps) {
   return (
      <>
       <S.Container>

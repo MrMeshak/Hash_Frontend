@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import SideBar from '../sidebar/SideBar';
-import TopBar from '../topbar/TopBar';
+import TopBarMobile from '../topbar/TopBarMobile';
+import TopBarTablet from '../topbar/TopBarTablet';
 
 
 export interface INavBarProps {
@@ -15,7 +16,8 @@ export default function NavBar (props: INavBarProps) {
 
   return (
     <div>
-      <TopBar sideBarOpen = {sideBarOpen} toggleSideBar={toggleSideBar}/>
+      <TopBarTablet/>
+      <TopBarMobile sideBarOpen = {sideBarOpen} toggleSideBar={toggleSideBar}/>
       <SideBar sideBarOpen = {sideBarOpen} toggleSideBar={toggleSideBar}/>
     </div>
   );

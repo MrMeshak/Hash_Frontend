@@ -53,8 +53,15 @@ interface IFormTheme {
   defaultText: string;
 }
 
-export interface IStatusTheme{
-  
+export interface IDevice {
+  mobileS: string;
+  mobileM: string;
+  mobileL: string;
+  tablet: string;
+  laptop: string;
+  laptopL: string;
+  desktop: string;
+  desktopL: string;
 }
 
 export interface ITheme {
@@ -62,33 +69,31 @@ export interface ITheme {
   button: IButtonTheme;
   interactive: IInteractiveTheme;
   form: IFormTheme;
+  device: IDevice;
 }
 
-
-
 export const colortheme: IColorTheme = {
-  primary: "#ad1fea",
-  primaryHover: "#c75af6",
-  secondary: "#4661e6",
-  secondaryHover: "#7C91F9",
-  tertiary: "#373f68",
-  tertiaryHover: "#656EA3",
-  tertiaryVarient: "#3a4374",
-  surface: "#ffffff",
-  background: "#f2f4ff",
-  input: "#f7f8fd",
-  headings: "#3A4374",
-  paragraph: "#647196",
-  primaryAccent: "#f49f85",
-  secondaryAccent: "#62BCFA",
-  tertiaryAccent: "#e84d70",
-  error: "#d73737",
-  errorHover: "#e98888",
-  textOnDark: "#f2f4ff",
-  textOnLight: "#647196",
-  textGreyedOut: "#979797",
-  seperationLine: "#8C92B3" 
-  
+  primary: '#ad1fea',
+  primaryHover: '#c75af6',
+  secondary: '#4661e6',
+  secondaryHover: '#7C91F9',
+  tertiary: '#373f68',
+  tertiaryHover: '#656EA3',
+  tertiaryVarient: '#3a4374',
+  surface: '#ffffff',
+  background: '#f2f4ff',
+  input: '#f7f8fd',
+  headings: '#3A4374',
+  paragraph: '#647196',
+  primaryAccent: '#f49f85',
+  secondaryAccent: '#62BCFA',
+  tertiaryAccent: '#e84d70',
+  error: '#d73737',
+  errorHover: '#e98888',
+  textOnDark: '#f2f4ff',
+  textOnLight: '#647196',
+  textGreyedOut: '#979797',
+  seperationLine: '#8C92B3'
 };
 
 export const buttonTheme: IButtonTheme = {
@@ -102,17 +107,17 @@ export const buttonTheme: IButtonTheme = {
   error: colortheme.error,
   errorHover: colortheme.errorHover,
   textOnDark: colortheme.textOnDark,
-  textOnTransparent: colortheme.paragraph,
+  textOnTransparent: colortheme.paragraph
 };
 
 export const interactiveTheme: IInteractiveTheme = {
   default: colortheme.background,
-  hover: "#CFD7FF",
+  hover: '#CFD7FF',
   active: colortheme.secondary,
   headingText: colortheme.tertiaryVarient,
   headingHighlightText: colortheme.secondary,
   activeText: colortheme.textOnDark,
-  textOnLight: colortheme.textOnLight,
+  textOnLight: colortheme.textOnLight
 };
 
 export const formTheme: IFormTheme = {
@@ -120,19 +125,34 @@ export const formTheme: IFormTheme = {
   default: colortheme.input,
   active: colortheme.secondary,
   error: colortheme.error,
-  defaultText: colortheme.tertiaryVarient,
+  defaultText: colortheme.tertiaryVarient
 };
 
-export const StatusTheme: IStatusTheme = {
-  planned: colortheme.primaryAccent,
-  inProgress: colortheme.primary,
-  live: colortheme.secondaryAccent
-}
+const size = {
+  mobileS: '320px',
+  mobileM: '375px',
+  mobileL: '425px',
+  tablet: '768px',
+  laptop: '1024px',
+  laptopL: '1440px',
+  desktop: '2560px'
+};
+
+export const device = {
+  mobileS: `(min-width: ${size.mobileS})`,
+  mobileM: `(min-width: ${size.mobileM})`,
+  mobileL: `(min-width: ${size.mobileL})`,
+  tablet: `(min-width: ${size.tablet})`,
+  laptop: `(min-width: ${size.laptop})`,
+  laptopL: `(min-width: ${size.laptopL})`,
+  desktop: `(min-width: ${size.desktop})`,
+  desktopL: `(min-width: ${size.desktop})`
+};
 
 export const theme: ITheme = {
   colors: colortheme,
   button: buttonTheme,
   interactive: interactiveTheme,
   form: formTheme,
+  device: device
 };
-

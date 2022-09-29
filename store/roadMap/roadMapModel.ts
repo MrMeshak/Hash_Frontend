@@ -1,22 +1,16 @@
  import {theme} from '../../styles/theme'
- import {ILibraryState} from '../library/libraryModel'
+ import {IFilter, ILibPost, ILibrary, ISort} from '../library/libraryModel'
 
-
-export interface IRoadMapState{
-  plannedLib: ILibraryState
-  inprogressLib: ILibraryState
-  liveLib: ILibraryState
-}
-
-export interface IStatus{
+export interface IRoadMapLib{
   title: string;
   value: string;
-  color: string;
+  description: string;
+  posts: ILibPost[];
 }
- 
-export const statusList:IStatus[] = [
-  {title: "", value: "NONE", color: "transparent"},
-  {title: "Planned", value: "PLANNED", color: theme.colors.primaryAccent},
-  {title: "In Progress", value: "INPROGRESS", color: theme.colors.primary},
-  {title: "Live", value: "LIVE", color: theme.colors.secondaryAccent}
-]
+
+export interface IRoadMapState{
+  libraries: IRoadMapLib[]
+  loading: boolean;
+  error: string;
+}
+

@@ -6,12 +6,17 @@ interface ISortFilter{
 }
 
 export const Container = styled.div`
-margin-top: 5rem;
+    margin-top: 5rem;
     padding: 0.5rem 1.5rem;
     display:flex;
     justify-content: space-between;
     align-items: center;
     background-color: ${props => props.theme.colors.tertiary};
+
+    @media ${props=>props.theme.device.tablet}{
+        margin: 0rem 1.5rem  0rem  1.5rem;
+        border-radius: 10px;
+    }
 
 `
 export const SortFilter = styled.div<ISortFilter>`

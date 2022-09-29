@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ILibPost } from "../store/library/libraryModel";
 
 export const axiosGql = axios.create({
   baseURL: "http://localhost:4000",
@@ -201,6 +202,39 @@ mutation addReply($commentId: ID, $content: String!){
 }
 `
 
+export interface IGetRoadMapLib{
+  authToken: string;
+  status: string;
+}
+
+export interface IGetRoadMapLibRes{
+  status: string;
+  posts: ILibPost[]
+}
+
+export const getRoadMapLibQuery = `
+query postsByStatus($status: String!){
+  postsByStatus(status: $status){
+    id
+    title
+    description
+    category
+    status
+    upVotes
+    createdAt
+    updatedAt
+    authorId
+    currentUserUpVote
+    commentCount
+  }
+}
+`
+
+export const getLibraryCountByStatusQuery = `
+query libraryCountByStatus($status: String!){
+  libraryCountByStatus(status: $status)
+}
+`;
 
 
 

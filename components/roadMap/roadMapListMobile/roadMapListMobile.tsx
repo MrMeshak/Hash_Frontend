@@ -1,15 +1,21 @@
-import React from 'react';
-import * as S from './roadMapListMobile.styles'
+import React, {useState} from 'react';
+import { selectRoadMapLibraries, useAppSelector } from '../../../store/hooks';
+import PostList from '../../library/postList/PostList';
+import RoadMapControlBar from '../roadMapControlBar/RoadMapControlBar';
+import { statusValuesMap } from '../../../helpers/postStatusValueMap';
 
-
-export interface IRoadMapListMoblieProps {
+export interface IRoadMapListMobileProps {
 }
 
-export default function RoadMapListMoblie (props: IRoadMapListMoblieProps) {
+export default function RoadMapListMobile (props: IRoadMapListMobileProps) {
+  const libraries = useAppSelector(selectRoadMapLibraries())
+  const [selectedStatus, setSelectedStatus] = useState('PLANNED');
+
+
   return (
-    <S.Container>
-      
-      
-    <S.Container>
+    <div>
+      <RoadMapControlBar selectedStatus={selectedStatus} libraries={libraries} setSelectedStatus={setSelectedStatus}/>
+      <PostList displayLibraryEmpty={false} displayPostWithStatus={true} posts={libraries[statusValuesMap.get(selectedStatus)?.libraryIndex || 0].posts}/>
+    </div>
   );
 }

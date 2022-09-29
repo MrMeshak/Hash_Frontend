@@ -14,7 +14,6 @@ export interface ICardProps {
 
 export default function Card (props: ICardProps) {
   const post = props.post
-  const dispatch = useAppDispatch()
   const loggedIn = useAppSelector(selectLoggedIn())
 
   const [voteCountBtnActive, setVoteCountBtnActive] = useState(post.currentUserUpVote)
@@ -44,16 +43,29 @@ export default function Card (props: ICardProps) {
 
   return (
     <S.Container>
-      <Link href={'/post/'+ post.id}><S.Title>{post.title}</S.Title></Link>
-      <S.Description>{post.description}</S.Description>
-      <S.Tag>{post.category}</S.Tag>
-      <S.PostInfoContainer>
+      <S.FlexContainer>
+        <S.VoteCountTablet>
+          <S.VoteCountBtn active = {voteCountBtnActive} onClick = {handleVoteCountBtn}>
+              <div><S.IconVoteSpan active = {voteCountBtnActive}><FontAwesomeIcon icon={faAngleUp}/></S.IconVoteSpan></div>
+              {upVotes}
+            </S.VoteCountBtn>
+        </S.VoteCountTablet>
+        <S.PostInfoContainer>
+          <Link href={'/post/'+ post.id}><S.Title>{post.title}</S.Title></Link>
+          <S.Description>{post.description}</S.Description>
+          <S.Tag>{post.category}</S.Tag>
+        </S.PostInfoContainer>
+      </S.FlexContainer>
+      <S.CommentCountTablet>
+          <S.IconCommmentSpan><FontAwesomeIcon icon={faComment}/></S.IconCommmentSpan><div>{post.commentCount}</div>
+      </S.CommentCountTablet>
+      <S.PostStatsContainerMobile>
           <S.VoteCountBtn active = {voteCountBtnActive} onClick = {handleVoteCountBtn}>
             <S.IconVoteSpan active = {voteCountBtnActive}><FontAwesomeIcon icon={faAngleUp}/></S.IconVoteSpan>
             {upVotes}
           </S.VoteCountBtn>
           <S.CommentCount><S.IconCommmentSpan><FontAwesomeIcon icon={faComment}/></S.IconCommmentSpan>{post.commentCount}</S.CommentCount>
-      </S.PostInfoContainer>
+      </S.PostStatsContainerMobile>
     </S.Container>
   );
 }
