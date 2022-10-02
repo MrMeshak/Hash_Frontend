@@ -25,14 +25,7 @@ export default function EditPostForm (props: IEditPostFormProps) {
   const [categoryListOpen, setCategoryListOpen] = useState(false)
   
   const user = useAppSelector(selectUser())
-  if(!user){return null}
   const post = useAppSelector(selectPost())
-  if(!post){return null}
-
-  if(post.authorId !== user.id){
-    return null
-  }
-
 
 
   const initialValues: IEditPostFormValues = {
@@ -117,6 +110,14 @@ export default function EditPostForm (props: IEditPostFormProps) {
         setServerError(error.message)
       })
   }
+
+  if(!user){return null}
+  if(!post){return null}
+
+  if(post.authorId !== user.id){
+    return null
+  }
+
 
   return (
     <S.Container>
