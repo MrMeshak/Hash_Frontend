@@ -9,11 +9,13 @@ export const Container = styled.div`
 
   @media ${(props) => props.theme.device.tablet} {
     margin: 0;
-    width: 30rem;
+    flex-basis: 13rem;
+    flex-grow: 0;
+    flex-shrink: 0;
   }
   @media ${(props) => props.theme.device.laptop} {
     margin: 0;
-    width: 15rem;
+    width: 100%;
   }
 `;
 export const TitleSection = styled.div`

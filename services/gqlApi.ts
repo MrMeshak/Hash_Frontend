@@ -1,10 +1,10 @@
-import axios from "axios";
-import { ILibPost } from "../store/library/libraryModel";
+import axios from 'axios';
+import { ILibPost } from '../store/library/libraryModel';
 
 export const axiosGql = axios.create({
-  baseURL: "http://localhost:4000",
+  baseURL: 'http://localhost:4000',
   timeout: 4000,
-  withCredentials: true,
+  withCredentials: true
 });
 
 export interface IKnownError {
@@ -53,11 +53,11 @@ export const getCurrentUserQuery = `
 `;
 
 export interface IToggleUpVote {
-  postId: string,
+  postId: string;
 }
 
-export interface IToggleUpVoteRes{
-  postId: string
+export interface IToggleUpVoteRes {
+  postId: string;
 }
 
 export const toggleUpVoteQuery = `
@@ -84,16 +84,16 @@ export const getFilteredLibraryQuery = `
       commentCount
     }
   }
-`
-export const addPostQuery =`
+`;
+export const addPostQuery = `
   mutation addPost($title: String!, $description: String!, $category: String!){
     addPost(title: $title, description: $description, category: $category){
       id
     }
   }
-`
+`;
 
-export interface IGetPost{
+export interface IGetPost {
   authToken: string;
   postId: string;
 }
@@ -140,7 +140,7 @@ query post($postId: ID){
       }
     }
   }
-`
+`;
 
 export interface IAddComment {
   postId: string;
@@ -176,9 +176,9 @@ export const addCommentQuery = `
       }
     }
   }
-`
+`;
 
-export interface IAddReply{
+export interface IAddReply {
   commentId: string;
   content: string;
 }
@@ -200,16 +200,16 @@ mutation addReply($commentId: ID, $content: String!){
     }
   }
 }
-`
+`;
 
-export interface IGetRoadMapLib{
+export interface IGetRoadMapLib {
   authToken: string;
   status: string;
 }
 
-export interface IGetRoadMapLibRes{
+export interface IGetRoadMapLibRes {
   status: string;
-  posts: ILibPost[]
+  posts: ILibPost[];
 }
 
 export const getRoadMapLibQuery = `
@@ -228,7 +228,7 @@ query postsByStatus($status: String!){
     commentCount
   }
 }
-`
+`;
 
 export const getLibraryCountByStatusQuery = `
 query libraryCountByStatus($status: String!){
@@ -236,5 +236,28 @@ query libraryCountByStatus($status: String!){
 }
 `;
 
+export const updatePostQuery = `
+mutation updatePost($postId: ID!, $title: String!, $description: String!, $category: String!){
+  updatePost(postId: $postId, title: $title, description: $description, category: $category){
+    id
+    title
+    description
+    category
+    status
+    upVotes
+    createdAt
+    updatedAt
+    authorId
+    currentUserUpVote
+    commentCount
+  }
+}
+`;
 
-
+export const deletePostQuery = `
+mutation deletePost($postId: ID!){
+  deletePost(postId: $postId){
+    id
+  }
+}
+`;

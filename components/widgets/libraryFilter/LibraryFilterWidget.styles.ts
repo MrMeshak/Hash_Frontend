@@ -7,13 +7,15 @@ export const Container = styled.div`
   border-radius: 10px;
   background-color: ${(props) => props.theme.colors.surface};
   @media ${(props) => props.theme.device.tablet} {
-    width: 30rem;
-    margin: 0rem;
+    margin: 0;
     margin-right: 1rem;
+    flex-basis: 13rem;
+    flex-grow: 0;
+    flex-shrink: 0;
   }
   @media ${(props) => props.theme.device.laptop} {
     margin: 0;
-    width: 15rem;
+    width: 100%;
   }
 `;
 

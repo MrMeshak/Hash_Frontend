@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const PrimaryBtn = styled.button`
   width: 100%;
@@ -73,7 +73,7 @@ export const DropDownBtn = styled.button`
 `;
 
 export const InteractiveBtn = styled.button`
-  font-family: "Jost";
+  font-family: 'Jost';
   font-weight: 700;
   font-size: 0.9rem;
   color: ${(props) => props.theme.interactive.headingText};
@@ -88,3 +88,19 @@ export const InteractiveBtn = styled.button`
 `;
 
 export const interactiveLink = styled.a``;
+
+export const DangerBtn = styled.button`
+  width: 100%;
+  margin: 1rem 0rem;
+  padding: 0.8rem 1rem;
+  color: ${(props) => props.theme.button.textOnDark};
+  background-color: ${(props) => props.theme.button.error};
+  font-weight: 700;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  &:hover {
+    background-color: ${(props) => props.theme.button.errorHover};
+  }
+`;

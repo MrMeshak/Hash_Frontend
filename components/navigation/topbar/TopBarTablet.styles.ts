@@ -15,6 +15,8 @@ export const Container = styled.div`
   }
 `;
 
+export const TitleUserContainer = styled.div``;
+
 export const TitleContainer = styled.div`
   display: flex;
   flex-direction: column;

@@ -21,7 +21,8 @@ export default function Card (props: ICardProps) {
 
   useEffect(() => {
     setVoteCountBtnActive(post.currentUserUpVote)
-  },[post.currentUserUpVote])
+    setUpVotes(post.upVotes)
+  },[post])
  
   const handleVoteCountBtn = async () => {
     console.log("handleVoteCountBtn")

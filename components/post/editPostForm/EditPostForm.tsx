@@ -1,34 +1,44 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import * as S from './EditPostForm.styles';
+import {FormikErrors, useFormik} from 'formik';
 import { useRouter } from 'next/router';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleLeft, faPlus, faAngleDown ,faAngleUp} from '@fortawesome/free-solid-svg-icons';
-import { Formik, FormikErrors, useFormik } from 'formik';
-import * as S from './AddPostForm.styles'
-import DropDown from '../../utility/dropDown/DropDown'
+import { selectPost, selectUser, useAppSelector } from '../../../store/hooks';
 import { categoryList, ICategory } from '../../../store/library/libraryModel';
-import axios from 'axios';
-import { addPostQuery, axiosGql } from '../../../services/gqlApi';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleDown, faAngleLeft, faAngleUp, faEdit } from '@fortawesome/free-solid-svg-icons';
+import DropDown from '../../utility/dropDown/DropDown';
+import { axiosGql, deletePostQuery, updatePostQuery } from '../../../services/gqlApi';
 
 
-
-export interface IAddPostFormValues{
+export interface IEditPostFormValues{
   title: string;
   category: ICategory;
   description: string;
 }
 
-export interface IAddPostFormProps {
+export interface IEditPostFormProps {
 }
 
-export default function AddPostForm (props: IAddPostFormProps) {
+export default function EditPostForm (props: IEditPostFormProps) {
   const router = useRouter();
   const [serverError, setServerError] = useState("")
   const [categoryListOpen, setCategoryListOpen] = useState(false)
+  
+  const user = useAppSelector(selectUser())
+  if(!user){return null}
+  const post = useAppSelector(selectPost())
+  if(!post){return null}
 
-  const initialValues: IAddPostFormValues = {
-    title: "",
-    category: categoryList[0],
-    description: ""
+  if(post.authorId !== user.id){
+    return null
+  }
+
+
+
+  const initialValues: IEditPostFormValues = {
+    title: post.title || "",
+    category: categoryList.find((category)=> category.value === post.category) || categoryList[0],
+    description: post.description || ""
   }
 
   const onSubmit = () => {
@@ -36,8 +46,9 @@ export default function AddPostForm (props: IAddPostFormProps) {
     axiosGql
       .post('/graphql',
       {
-        query: addPostQuery,
+        query: updatePostQuery,
         variables: {
+          postId: post.id,
           title: formik.values.title, 
           description: formik.values.description, 
           category: formik.values.category.value
@@ -48,15 +59,15 @@ export default function AddPostForm (props: IAddPostFormProps) {
           setServerError(res.data.errors[0].message)
           return
         }
-        router.back()
+        router.replace('/')
       })
       .catch((error) => {
         setServerError(error.message)
       })
   }
 
-  const validate = (values: IAddPostFormValues) => {
-    let errors: FormikErrors<IAddPostFormValues> = {}
+  const validate = (values: IEditPostFormValues) => {
+    let errors: FormikErrors<IEditPostFormValues> = {}
     if(!values.title){
       errors.title = "Required"
     }else if(values.title.length > 80){
@@ -74,7 +85,7 @@ export default function AddPostForm (props: IAddPostFormProps) {
   const formik = useFormik({
     initialValues: initialValues,
     onSubmit: onSubmit,
-    validate: validate
+    validate: validate  
   })
 
   const toggleCategoryList = () => {
@@ -82,29 +93,49 @@ export default function AddPostForm (props: IAddPostFormProps) {
   }
 
   const setSelectedCategory = (selectedCategory:ICategory) => {
-    formik.setFieldValue('category', selectedCategory)
+    formik.setFieldValue('category',selectedCategory)
     toggleCategoryList()
   }
 
-
+  const handleDeleteBtn = () => {
+    axiosGql
+      .post('/graphql',
+      {
+        query: deletePostQuery,
+        variables: {
+          postId: post.id,
+        }
+      })
+      .then((res) => {
+        if(res.data.errors){
+          setServerError(res.data.errors[0].message)
+          return
+        }
+        router.replace('/')
+      })
+      .catch((error) => {
+        setServerError(error.message)
+      })
+  }
 
   return (
     <S.Container>
-      <S.BackLink onClick={()=>router.back()} >
+      <S.BackLink onClick={()=>router.back}>
         <S.IconArrowSpan><FontAwesomeIcon icon={faAngleLeft}/></S.IconArrowSpan>
         Go Back
-    </S.BackLink>  
+      </S.BackLink>
       <S.Form onSubmit={formik.handleSubmit}>
-        <S.Icon><FontAwesomeIcon icon={faPlus}/></S.Icon>
-        <S.Title>Create New Feedback</S.Title>
+        <S.Icon><FontAwesomeIcon icon={faEdit}/></S.Icon>
+        <S.Title>Editing &lsquo;{post.title}&rsquo; </S.Title>
         <S.FormControl>
-          <S.Label >Feedback Title</S.Label>
+          <S.Label>Feedback Title</S.Label>
           <S.Description>Add a short, descriptive headline</S.Description>
-          <S.TextInput 
-            id='title' 
-            name='title' 
-            onChange={formik.handleChange} 
-            onBlur = {formik.handleBlur}
+          <S.TextInput
+            id='title'
+            name='title'
+            value={formik.values.title}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             hasError={!!(formik.errors.title && formik.touched.title)}
           />
           {formik.touched.title && formik.errors.title ? <S.ErrorMessage>{formik.errors.title}</S.ErrorMessage> : null}
@@ -123,19 +154,24 @@ export default function AddPostForm (props: IAddPostFormProps) {
           <S.Description>Include any specific comments on what should be improved, added, etc.</S.Description>
           <S.TextAreaInput 
             id='description' 
-            name='description' 
+            name='description'
+            value= {formik.values.description} 
             onChange={formik.handleChange}
-            onBlur = {formik.handleBlur}
+            onBlur= {formik.handleBlur}
             hasError={!!(formik.errors.description && formik.touched.description)}
           />
           {formik.touched.description && formik.errors.description ? <S.ErrorMessage>{formik.errors.description}</S.ErrorMessage> : null}
         </S.FormControl>
         <S.ErrorMessage>{serverError}</S.ErrorMessage>
         <S.ControlBar>
-          <S.AddPostBtn type="submit">Add Feedback</S.AddPostBtn>
-          <S.CancelBtn type="button" onClick={() => router.back()} >Cancel</S.CancelBtn>
+          <S.CancelSaveBtnContainer>
+            <S.SavePostBtn type="submit">Save Changes</S.SavePostBtn>
+            <S.CancelBtn type="button" onClick={() => router.back()} >Cancel</S.CancelBtn>
+          </S.CancelSaveBtnContainer>
+          <S.DeleteBtn type="button" onClick={handleDeleteBtn}>Delete</S.DeleteBtn>
         </S.ControlBar>
       </S.Form>
     </S.Container>
   );
 }
+

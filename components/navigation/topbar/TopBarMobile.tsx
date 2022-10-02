@@ -13,8 +13,8 @@ export default function TopBarMobile (props: ITopBarMobileProps) {
      <>
       <S.Container>
           <div>
-              <S.Title>Frontend Mentor</S.Title>
-              <S.Subtitle>Feedback Board</S.Subtitle>
+              <S.Title># Hash</S.Title>
+              <S.Subtitle>Developer Community</S.Subtitle>
           </div>
           <S.MenuBtn onClick={()=>props.toggleSideBar()}><FontAwesomeIcon icon={props.sideBarOpen?faXmark:faBars}/></S.MenuBtn> 
       </S.Container>

@@ -2,10 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { faAngleUp, faCircle, faComment } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Post from '../../../pages/post/[postId]';
 import { ILibPost} from '../../../store/library/libraryModel';
-import { IPost } from '../../../store/post/postModel';
-import Card from '../card/Card';
 import { statusValuesMap } from '../../../helpers/postStatusValueMap';
 import * as S from './CardWithStatus.styles' 
 import { selectLoggedIn, useAppSelector } from '../../../store/hooks';

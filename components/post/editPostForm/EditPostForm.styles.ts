@@ -1,14 +1,11 @@
 import styled from 'styled-components';
-import { NavigationLink, PrimaryBtn, TertiaryBtn } from '../../utility/button/button.styles';
+import { DangerBtn, NavigationLink, PrimaryBtn, TertiaryBtn } from '../../utility/button/button.styles';
 import { DefaultTextArea, DefaultTextInput, ITextInputProps } from '../../utility/input/input.styles';
 
 export const Container = styled.div`
   padding: 1.5rem;
-
-  @media ${(props) => props.theme.device.tablet} {
-    max-width: 55rem;
-    margin: auto;
-  }
+  max-width: 55rem;
+  margin: auto;
 `;
 
 export const BackLink = styled(NavigationLink)``;
@@ -41,13 +38,6 @@ export const Icon = styled.div`
   border-radius: 1.5rem;
 
   background: radial-gradient(at top right, ${(props) => props.theme.colors.tertiaryAccent}, ${(props) => props.theme.colors.primary}, ${(props) => props.theme.colors.secondary});
-`;
-
-export const Title = styled.div`
-  margin-bottom: 1.5rem;
-  color: ${(props) => props.theme.colors.tertiaryVarient};
-  font-size: large;
-  font-weight: 700;
 `;
 
 export const FormControl = styled.div`
@@ -101,8 +91,16 @@ export const ErrorMessage = styled.div`
 export const ControlBar = styled.div`
   @media ${(props) => props.theme.device.tablet} {
     display: flex;
+    justify-content: space-between;
     flex-direction: row-reverse;
-    justify-content: flex-start;
+  }
+`;
+
+export const CancelSaveBtnContainer = styled.div`
+  @media ${(props) => props.theme.device.tablet} {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
   }
 `;
 
@@ -127,21 +125,34 @@ export const Option = styled.option`
   background-color: ${(props) => props.theme.colors.surface};
 `;
 
-export const AddPostBtn = styled(PrimaryBtn)`
+export const SavePostBtn = styled(PrimaryBtn)`
   width: 100%;
-  margin: 1rem 0rem 0rem 0rem;
+  margin: 0rem 0rem;
   padding: 0.8rem 1rem;
+  @media ${(props) => props.theme.device.tablet} {
+    width: 10rem;
+    height: 3rem;
+  }
+`;
+export const CancelBtn = styled(TertiaryBtn)`
+  @media ${(props) => props.theme.device.tablet} {
+    width: 10rem;
+    height: 3rem;
+    margin-right: 1rem;
+  }
+`;
+
+export const DeleteBtn = styled(DangerBtn)`
   @media ${(props) => props.theme.device.tablet} {
     width: 10rem;
   }
 `;
-export const CancelBtn = styled(TertiaryBtn)`
-  width: 100%;
-  margin: 1rem 0rem 0rem 0rem;
-  @media ${(props) => props.theme.device.tablet} {
-    width: 6rem;
-    margin-right: 1rem;
-  }
+
+export const Title = styled.div`
+  margin-bottom: 1.5rem;
+  color: ${(props) => props.theme.colors.tertiaryVarient};
+  font-size: large;
+  font-weight: 700;
 `;
 
 export const IconArrowSpan = styled.span`

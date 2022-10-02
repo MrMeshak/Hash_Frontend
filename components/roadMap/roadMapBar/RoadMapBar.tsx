@@ -3,12 +3,14 @@ import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import * as S from './RoadMapBar.styles'
+import { selectLoggedIn, useAppSelector } from '../../../store/hooks';
 
 export interface IRoadMapBarProps {
 }
 
 export default function RoadMapBar (props: IRoadMapBarProps) {
   const router = useRouter();
+  const loggedIn = useAppSelector(selectLoggedIn())
 
   return (
     <S.Container>
@@ -19,7 +21,7 @@ export default function RoadMapBar (props: IRoadMapBarProps) {
         </S.BackLink>
         <S.Title>Roadmap</S.Title>
       </div>
-      <S.AddFeedbackBtn>+ Add Feedback</S.AddFeedbackBtn>
+      {loggedIn? <S.AddFeedbackBtn onClick={()=>router.push('/post/addPost')}>+ Add Feedback</S.AddFeedbackBtn> : null}
     </S.Container>
   );
 }
