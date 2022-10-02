@@ -111,14 +111,6 @@ export default function EditPostForm (props: IEditPostFormProps) {
       })
   }
 
-  if(!user){return null}
-  if(!post){return null}
-
-  if(post.authorId !== user.id){
-    return null
-  }
-
-
   return (
     <S.Container>
       <S.BackLink onClick={()=>router.back}>
