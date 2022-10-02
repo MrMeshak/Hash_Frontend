@@ -21,13 +21,12 @@ export interface IEditPostFormProps {
 
 export default function EditPostForm (props: IEditPostFormProps) {
   const router = useRouter();
+  const user = useAppSelector(selectUser())
+  const post = useAppSelector(selectPost())
   const [serverError, setServerError] = useState("")
   const [categoryListOpen, setCategoryListOpen] = useState(false)
   
-  const user = useAppSelector(selectUser())
-  const post = useAppSelector(selectPost())
-
-
+  
   const initialValues: IEditPostFormValues = {
     title: post.title || "",
     category: categoryList.find((category)=> category.value === post.category) || categoryList[0],
