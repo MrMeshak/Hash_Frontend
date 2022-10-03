@@ -3,7 +3,7 @@ import { ILibPost } from '../store/library/libraryModel';
 
 export const axiosGql = axios.create({
   baseURL: 'https://hashbackend-production.up.railway.app:4000',
-  timeout: 4000,
+  timeout: 8000,
   withCredentials: true
 });
 
