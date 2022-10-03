@@ -1,10 +1,10 @@
-import axios from "axios";
-import { IUser } from "../store/user/userModel";
+import axios from 'axios';
+import { IUser } from '../store/user/userModel';
 
 export const axiosAuth = axios.create({
-  baseURL: "http://localhost:4000/auth",
+  baseURL: 'hashbackend-production.up.railway.app:4000/auth',
   timeout: 4000,
-  withCredentials: true,
+  withCredentials: true
 });
 
 export interface ILogin {
