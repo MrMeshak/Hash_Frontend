@@ -12,7 +12,7 @@ export default function RoadMapList (props: IRoadMapListProps) {
     <S.Container>
       {libraries.map((library) => {
         return (
-          <S.LibraryContainer>
+          <S.LibraryContainer key={library.value + "Tablet"}>
             <S.LibraryInfoContainer>
                 <S.LibraryTitle>{library.title} ({library.posts.length})</S.LibraryTitle>
                 <S.LibraryDescription>{library.description}</S.LibraryDescription>
