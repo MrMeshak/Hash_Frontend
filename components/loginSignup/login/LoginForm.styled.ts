@@ -1,13 +1,12 @@
-import styled from "styled-components";
-import {
-  NavigationLink,
-  PrimaryBtn,
-} from "../../utility/button/button.styles";
-import { DefaultTextInput, ITextInputProps } from "../../utility/input/input.styles";
-
+import styled from 'styled-components';
+import { NavigationLink, PrimaryBtn } from '../../utility/button/button.styles';
+import { DefaultTextInput, ITextInputProps } from '../../utility/input/input.styles';
 
 export const Container = styled.div`
   padding: 1.5rem;
+  width: 100%;
+  max-width: 55rem;
+  margin: auto;
 `;
 export const BackLink = styled(NavigationLink)``;
 
@@ -38,12 +37,7 @@ export const Icon = styled.div`
   background-color: grey;
   border-radius: 1.5rem;
 
-  background: radial-gradient(
-    at top right,
-    ${(props) => props.theme.colors.tertiaryAccent},
-    ${(props) => props.theme.colors.primary},
-    ${(props) => props.theme.colors.secondary}
-  );
+  background: radial-gradient(at top right, ${(props) => props.theme.colors.tertiaryAccent}, ${(props) => props.theme.colors.primary}, ${(props) => props.theme.colors.secondary});
 `;
 
 export const Title = styled.div`
@@ -67,11 +61,9 @@ export const TextInput = styled(DefaultTextInput)<ITextInputProps>`
   margin: 1rem 0rem 0rem 0rem;
   width: 100%;
   padding: 0.9rem 1rem;
-  border: 1px solid
-    ${(props) => (props.hasError ? props.theme.form.error : "transparent")};
+  border: 1px solid ${(props) => (props.hasError ? props.theme.form.error : 'transparent')};
   &:focus {
-    border-color: ${(props) =>
-      props.hasError ? props.theme.form.error : props.theme.form.active};
+    border-color: ${(props) => (props.hasError ? props.theme.form.error : props.theme.form.active)};
   }
 `;
 

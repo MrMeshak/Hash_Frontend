@@ -1,5 +1,6 @@
 import { NextPage } from "next"
 import { promises } from "stream"
+import RoadMapPage from "../components/pages/roadMapPage/RoadMapPage"
 import RoadMapBar from "../components/roadMap/roadMapBar/RoadMapBar"
 import RoadMapControlBar from "../components/roadMap/roadMapControlBar/RoadMapControlBar"
 import RoadMapList from "../components/roadMap/roadMapList/RoadMapList"
@@ -13,8 +14,7 @@ const RoadMap: NextPage = (props) => {
 
   return(
     <>
-      <RoadMapBar/>
-      <RoadMapListMobile/>
+      <RoadMapPage/>
     </>
   )
 }
