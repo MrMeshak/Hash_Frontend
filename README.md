@@ -8,7 +8,7 @@
 
 **Demo Login**
 
-- Email: <span>test123@gmail.com</span>
+- Email: test123@gmail&#46;com
 - Password: Test123#
 
 ---
