@@ -9,7 +9,7 @@ requests into the road map to help keep users informed on which suggestions are
 currently being planned, worked on or are currently live on the site.
 
 ## Features
-Server Side Rendering for public pages to enable better SEO and time to first byte
+- Server Side Rendering for public pages to enable better SEO and time to first byte
 - Static Site Generation for static pages (login,signup,etc)
 - Fully responsive design that adapts to any display size
 - User accounts, authentication, dynamic pages based on user and secured
