@@ -86,13 +86,6 @@ export const VoteCountBtn = styled(InteractiveBtn)<IVoteCountBtn>`
   &:hover > span {
     color: ${(props) => (props.active ? props.theme.interactive.activeText : props.theme.interactive.headingText)};
   }
-
-  @media ${(props) => props.theme.device.tablet} {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 2.6rem;
-  }
 `;
 
 export const CommentCount = styled.div`
@@ -113,6 +106,10 @@ export const CommentCount = styled.div`
 export const IconVoteSpan = styled.span<IVoteCountBtn>`
   margin-right: 0.5rem;
   color: ${(props) => (props.active ? props.theme.interactive.activeText : props.theme.colors.secondary)};
+
+  @media ${(props) => props.theme.device.tablet} {
+    margin: 0 auto;
+  }
 `;
 
 export const IconCommmentSpan = styled.span`
