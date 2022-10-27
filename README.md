@@ -8,7 +8,7 @@ posts and reply to comments (similar to Reddit). The developers then place certa
 requests into the road map to help keep users informed on which suggestions are
 currently being planned, worked on or are currently live on the site.
 
-##Features
+## Features
 Server Side Rendering for public pages to enable better SEO and time to first byte
 - Static Site Generation for static pages (login,signup,etc)
 - Fully responsive design that adapts to any display size
@@ -20,7 +20,7 @@ backend API
 - Sorting & filtering of posts (implemented on backend for scalability and to support
 pagination)
 
-##Technologies
+## Technologies
 
 ### Frontend
 - NextJS 
