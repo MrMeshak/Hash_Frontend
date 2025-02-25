@@ -2,7 +2,7 @@ import axios from 'axios';
 import { IUser } from '../store/user/userModel';
 
 export const axiosAuth = axios.create({
-  baseURL: process.env.HASH_BE_URL + '/auth',
+  baseURL: 'hashbackend-production.up.railway.app',
   timeout: 8000,
   withCredentials: true
 });
